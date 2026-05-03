@@ -35,4 +35,11 @@ fn main() {
     // All
     let s = &nums[..];
     println!("{:?}", s);
+
+    // ------
+
+    let mut nums: [i32; 10] = [-1, 1, -2, 2, -3, 3, -4, 4, -5, 5];
+    let s: &mut [i32] = & mut nums[..];
+    s[0] = 99;
+    println!("s: {:?}", nums);
 }

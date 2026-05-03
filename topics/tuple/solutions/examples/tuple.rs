@@ -11,8 +11,17 @@ fn no_return() {}
 // Equivalent to `no_return`, but explicitly returning the unit type
 fn return_empty_tuple() -> () {}
 
+fn my_tuple() -> bool {
+
+    let x: (((u8, u16), bool), u32) = (((3,4), true), 42);
+    println!("x: {:?}", (x.0).0); // Accessing nested tuple values
+
+    let t: (bool, char, u32) = (true, 'c', 4);
+    return t.0;
+}
+
 fn main() {
-    // Tuples - fixed size, mixed types, known at compile time
+    // // Tuples - fixed size, mixed types, known at compile time
     let t: (bool, char, u32) = (true, 'c', 3);
     println!("({}, {}, {})", t.0, t.1, t.2);
 
@@ -33,4 +42,11 @@ fn main() {
     // Nested tuple
     let nested = (('a', 1.23), ('b', true, 1), ());
     println!("nested: {}", (nested.0).1);
+
+    let mut no_tuple: (bool, u8) = (true, 42); 
+    no_tuple.0 = false; // Mutating tuple values
+    println!("no_tuple: {:?}", no_tuple);
+    
+    let res: bool = my_tuple();
+    println!("res: {}", res);
 }
