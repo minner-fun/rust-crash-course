@@ -2,6 +2,7 @@
 
 fn main() {
     let mut v: Vec<i32> = Vec::new();
+    let mut vv: Vec<u32> = Vec::new();
     v.push(-1);
     v.push(-2);
     v.push(-3);
@@ -13,7 +14,7 @@ fn main() {
 
     // Vec<u8>
     let v = vec![1u8, 2, 3, 4];
-
+    println!("vec: {:?}", v);
     // Initialize with all 5 elements equal to 1
     let v = vec![1u8; 5];
     println!("vec: {:?}", v);

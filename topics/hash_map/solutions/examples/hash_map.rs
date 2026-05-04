@@ -7,6 +7,7 @@ fn main() {
 
     scores.insert("red".to_string(), 100);
     scores.insert("blue".to_string(), 200);
+    scores.insert("yellow".to_string(),150);
 
     // Get
     let score: Option<&u32> = scores.get("red");
