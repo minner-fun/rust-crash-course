@@ -1,11 +1,15 @@
 pub fn min(x: i32, y: i32) -> i32 {
-    todo!();
+    if x < y { x } else { y }
 }
 
 pub fn max(x: i32, y: i32) -> i32 {
-    todo!();
+    if x < y { y } else { x }
 }
 
 pub fn sign(x: i32) -> i32 {
-    todo!();
+    if x < 0 {
+        -1
+    } else {
+        1
+    }
 }
