@@ -1,12 +1,12 @@
 #[derive(Debug)]
-struct Config {
-    url: &str,
+struct Config<'a> {
+    url: &'a str,
     port: u32,
-    db_url: &str,
+    db_url: &'a str,
 }
 
 // Lifetime 'a can be omitted. Rust can automatically figure out the lifetime
-fn log(config: &Config) {
+fn log<'a>(config: &Config<'a>) {
     println!("Connecting to database at {}...", config.db_url);
     println!("server listening at {}:{}...", config.url, config.port);
 }
