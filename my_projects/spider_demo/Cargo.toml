@@ -1,0 +1,11 @@
+[package]
+name = "spider_demo"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
+reqwest = { version = "0.12", features = ["gzip", "brotli", "deflate", "rustls-tls"] }
+scraper = "0.19"
+anyhow = "1"
+url = "2"
