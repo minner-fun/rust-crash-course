@@ -22,7 +22,13 @@ async fn main() -> Result<()> {
         .build()?;
 
     // 下载 HTML
-    let html = client.get(target).send().await?.error_for_status()?.text().await?;
+    let html = client
+        .get(target)
+        .send()
+        .await?
+        .error_for_status()?
+        .text()
+        .await?;
 
     // 解析 HTML
     let doc = Html::parse_document(&html);
