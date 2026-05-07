@@ -7,9 +7,9 @@ fn hash_leaf<A: AsRef<[u8]>>(val: A) -> B256 {
     keccak256(&val)
 }
 
-fn hash_pair(left: B256, right: B256) -> B256 {
-    let mut buf = [0u8; 64];
-    buf[..32].copy_from_slice(left.as_ref());
+fn hash_pair(left: B256, right: B256) -> B256 { // B256 256-bit字节长度。8 * 32 个bytes
+    let mut buf = [0u8; 64];  // 容纳两个B256
+    buf[..32].copy_from_slice(left.as_ref()); // 
     buf[32..].copy_from_slice(right.as_ref());
     keccak256(buf)
 }
@@ -42,7 +42,7 @@ fn get_proof(hashes: &mut [B256], mut idx: usize) -> Vec<B256> {
         //   2     3
         //  / \   / \
         // 4   5 6   7
-        let j = if idx & 1 == 1 {
+        let j = if idx & 1 == 1 { // 先执行idx & 1 按位与，与1判断，断定idx是否为奇数
             idx - 1
         } else {
             usize::min(idx + 1, n - 1)

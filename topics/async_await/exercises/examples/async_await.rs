@@ -10,7 +10,7 @@ async fn main() {
 
     for i in 0..3_000_000_00 { // Loop to spawn 1 million async tasks
         // Create an async block (a future)
-        let fut = async move {
+        let fut = async move {  // move 是把所有变量都移动到fut内
             sleep(Duration::from_millis(100)).await; // Asynchronous sleep
             println!("Async: {} 🍔 is ready", i);
         };

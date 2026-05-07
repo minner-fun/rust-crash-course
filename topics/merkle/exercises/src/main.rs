@@ -18,16 +18,50 @@ fn calc_root_hash(hashes: &mut [B256]) -> B256 {
     let mut n = hashes.len();
     assert!(n > 0);
 
+    while n > 1 {
+        for i in (0..n).step_by(2) {
+            let left = hashes[i];
+            let right = hashes[usize::min(i + 1, n - 1)];
+            hashes[i / 2] = hash_pair(left, right);
+        }
+        n = (n + 1) / 2
+    }
+
     hashes[0]
 }
 
 fn get_proof(hashes: &mut [B256], mut idx: usize) -> Vec<B256> {
     let mut proof: Vec<B256> = Vec::new();
+    let mut n = hashes.len();
+    assert!(n > 0);
+    while n > 1 {
+        let j = if idx & 1 == 1 {
+            idx - 1
+        } else {
+            usize::min(idx + 1, n - 1)
+        };
+        proof.push(hashes[j]);
+        idx /= 2;
+
+        for i in (0..n).step_by(2) {
+            let left = hashes[i];
+            let right = hashes[usize::min(i + 1, n - 1)];
+            hashes[i / 2] = hash_pair(left, right);
+        }
+        n = (n + 1) / 2
+    }
+
     proof
 }
 
 fn verify(root: B256, proof: &[B256], hashes: &[B256], mut idx: usize) -> bool {
-    false
+    let mut h = hashes[idx];
+    for p in proof {
+        let (left, right): (B256, B256) = if idx & 1 == 0 { (h, *p) } else { (*p, h) };
+        h = hash_pair(left, right);
+        idx /= 2;
+    }
+    h == root
 }
 
 // cargo run
